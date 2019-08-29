@@ -9,7 +9,7 @@ API_key1 = '[INSERT API KEY FROM OPENWEATHERMAP HERE]'
 owm = OWM(API_key1)
 
 def resource_path(relative_path):
-     # Help's Pyinstaller refer to images packaged.
+     # Helps Pyinstaller refer to images packaged.
      if hasattr(sys, '_MEIPASS'):
          return os.path.join(sys._MEIPASS, relative_path)
      return os.path.join(os.path.abspath("."), relative_path)
@@ -53,9 +53,8 @@ class WeatherThread(QtCore.QThread):
             time.sleep(2)
 
     def getweather(self):
-        # set_location_relative = owm.weather_at_place('Fountain Valley, US')
-        # set_location_coord = owm.weather_at_coords(33.7296275, -117.9307587)  # Exact coordinates of 11381 HOME
-        set_location_coord = owm.weather_at_coords(33.860360, -118.241930)    # Exact coordinates of CARSON WORK
+        # set_location_relative = owm.weather_at_place('Fountain Valley, US')  # OPTION 1: Relative location
+        set_location_coord = owm.weather_at_coords(33.860360, -118.241930)    # OPTION 2: Exact coordinates
         location = set_location_coord.get_location()
         weather = set_location_coord.get_weather()
         temperature = weather.get_temperature('fahrenheit')  # {'temp_max', 'temp', 'temp_min'}
@@ -123,7 +122,7 @@ class ApplicationWindow(QtGui.QFrame):
         self.weatherLabel.setStyleSheet('color:white')
         self.weatherLabel.setFont(self.fontweather)
 
-        self.locationLabel = QtGui.QLabel("Connecting to Internet...", self)     #Location Label
+        self.locationLabel = QtGui.QLabel("Connecting to Internet...", self)     # Location Label
         self.locationLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.locationLabel.setStyleSheet('color:white')
         self.locationLabel.setFont(self.fontlocation)
@@ -141,7 +140,7 @@ class ApplicationWindow(QtGui.QFrame):
         self.clockThread = ClockThread()
         self.weatherThread = WeatherThread()
 
-        # Connect passthrough signals from thread and call on update functions
+        # Connect pass through signals from thread and call on update functions
         self.connect(self.clockThread, QtCore.SIGNAL('current_time_data'), self.updateTime)
         self.connect(self.clockThread, QtCore.SIGNAL('current_date_data'), self.updateDate)
         self.connect(self.weatherThread, QtCore.SIGNAL('current_weather_data'), self.updateWeather)
@@ -180,6 +179,6 @@ if __name__ == '__main__':
     screen_size = QtGui.QDesktopWidget().availableGeometry()
     window_size = instance.geometry()
 
-    instance.move(100, screen_size.height()-(window_size.height()*2)-100) # SETS WHERE TO APPEAR ON DESKTOP ON START-UP (X,Y)
+    instance.move(100, screen_size.height()-(window_size.height()*2)-100) # x,y placement adjustment on Desktop
     instance.show()
     sys.exit(app.exec_())

@@ -49,7 +49,7 @@
 
 Reach out to me at one of the following places!
 
-- Website at <a href="http://fvcproductions.com" target="_blank">`deanlnguyen.com`</a>
+- GitHub is <a href="http://github.com/deanln" target="_blank">`here`</a>
 - LinkedIn is <a href="https://www.linkedin.com/in/dean-nguyen-43a08b14a/" target="_blank">`here`</a>
 
 ---
